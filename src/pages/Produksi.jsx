@@ -3,6 +3,7 @@ import apiClient from "../config/axiosConfig";
 import "../style/style.css";
 import "../style/Produksi.css";
 import Topbar from "../components/Topbar";
+import { jwtDecode } from "jwt-decode";
 
 function Produksi() {
   const [pengerjaanList, setPengerjaanList] = useState([]);
@@ -52,7 +53,7 @@ function Produksi() {
   // Urutan status sesuai SRS, dipakai untuk validasi tidak boleh mundur
   const urutanStatus = { antrian: 1, dikerjakan: 2, revisi: 3, selesai: 4 };
 
-  // Pilihan status berikutnya tergantung status saat ini
+// Pilihan status berikutnya tergantung status saat ini (Diperbarui agar lebih fleksibel)
   const getOpsiStatus = (statusSaatIni) => {
     switch (statusSaatIni) {
       case "antrian":
@@ -60,9 +61,40 @@ function Produksi() {
       case "dikerjakan":
         return ["revisi", "selesai"];
       case "revisi":
-        return ["dikerjakan", "selesai"];
+        // 🌟 Ditambahkan opsi "dikerjakan" maupun "selesai" secara langsung
+        return ["dikerjakan", "selesai"]; 
       default:
         return [];
+    }
+  };
+
+  const handleSimpan = async () => {
+    if (!statusBaru) {
+      alert("Pilih status baru terlebih dahulu");
+      return;
+    }
+
+    // 🌟 Diperketat: Jika status revisi, pastikan catatan teknisi tidak kosong
+    if (statusBaru === "revisi" && catatan.trim() === "") {
+      alert("Catatan wajib diisi saat status revisi");
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      // 🌟 Payload disesuaikan dengan standar struktur database & backend Golang 
+      await apiClient.put(`/api/produksi/${selectedItem.id_pengerjaan}/status`, {
+        id_karyawan: idKaryawanAktif, 
+        status_produksi: statusBaru,
+        catatan_karyawan: catatan || "-" // Diberi fallback "-" agar backend tidak error null
+      });
+
+      await fetchPengerjaan();
+      handleCloseModal();
+    } catch (err) {
+      alert(err.response?.data?.message || "Gagal mengupdate status produksi");
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -82,34 +114,34 @@ function Produksi() {
     setStatusBaru("");
     setCatatan("");
   };
-const handleSimpan = async () => {
-    if (!statusBaru) {
-      alert("Pilih status baru terlebih dahulu");
-      return;
-    }
+// const handleSimpan = async () => {
+//     if (!statusBaru) {
+//       alert("Pilih status baru terlebih dahulu");
+//       return;
+//     }
 
-    if (statusBaru === "revisi" && catatan.trim() === "") {
-      alert("Catatan wajib diisi saat status revisi");
-      return;
-    }
+//     if (statusBaru === "revisi" && catatan.trim() === "") {
+//       alert("Catatan wajib diisi saat status revisi");
+//       return;
+//     }
 
-    setSubmitting(true);
-    try {
-      // 🌟 FIX: Sertakan id_karyawan teknisi yang update status
-      await apiClient.put(`/api/produksi/${selectedItem.id_pengerjaan}/status`, {
-        id_karyawan: idKaryawanAktif, 
-        status_produksi: statusBaru,
-        catatan_karyawan: catatan
-      });
+//     setSubmitting(true);
+//     try {
+//       // 🌟 FIX: Sertakan id_karyawan teknisi yang update status
+//       await apiClient.put(`/api/produksi/${selectedItem.id_pengerjaan}/status`, {
+//         id_karyawan: idKaryawanAktif, 
+//         status_produksi: statusBaru,
+//         catatan_karyawan: catatan
+//       });
 
-      await fetchPengerjaan();
-      handleCloseModal();
-    } catch (err) {
-      alert(err.response?.data?.message || "Gagal mengupdate status produksi");
-    } finally {
-      setSubmitting(false);
-    }
-  };
+//       await fetchPengerjaan();
+//       handleCloseModal();
+//     } catch (err) {
+//       alert(err.response?.data?.message || "Gagal mengupdate status produksi");
+//     } finally {
+//       setSubmitting(false);
+//     }
+//   };
   
 const renderCard = (item) => (
     <div

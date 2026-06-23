@@ -165,6 +165,11 @@ function Pesanan() {
               </button>
             )}
           </div>
+          {isUserDokter && (
+            <Link to="/buat-pesanan" className="btn" style={{ width: 'auto', padding: '12px 20px', background: '#3498db', color: 'white', border: 'none', borderRadius: '10px', cursor: 'pointer', fontSize:'14px' }}>
+              + Tambah Pesanan
+            </Link>
+          )}
         </div>
 
         {/* TABLE CARD */}
