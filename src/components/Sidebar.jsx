@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import "../style/style.css"; // 🌟 Impor CSS Sidebar di sini
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -12,13 +13,17 @@ const Sidebar = () => {
     navigate('/login');
   };
 
-  // Fungsi untuk mengecek path aktif agar menu menyala (highlighted) sesuai CSS asli
   const isActive = (path) => location.pathname === path ? "nav-item active" : "nav-item";
 
   return (
     <div className="sidebar">
       <div className="sidebar-logo">
-        <img src="/assets/Logo.png" alt="Logo" />
+        <img 
+          src="/src/assets/logokecil.png" 
+          alt="Logo" 
+          style={{ width: '100%', maxWidth: '45px', height: 'auto', objectFit: 'contain' }} 
+          onError={(e) => { e.target.src = "/src/assets/Logo.png" }} 
+        />
         <div>
           <p className="logo-title">DENTAL</p>
           <p className="logo-sub">SYSTEM</p>
@@ -26,10 +31,8 @@ const Sidebar = () => {
       </div>
 
       <nav className="sidebar-nav">
-        {/* Menu wajib untuk semua role */}
         <Link to="/dashboard" className={isActive('/dashboard')}>Dashboard</Link>
 
-        {/* Akses KHUSUS TEKNISI */}
         {role === 'teknisi' && (
           <>
             <Link to="/produk" className={isActive('/produk')}>Produk</Link>
@@ -38,7 +41,6 @@ const Sidebar = () => {
           </>
         )}
 
-        {/* Akses KHUSUS DOKTER */}
         {role === 'dokter' && (
           <>
             <Link to="/pesanan" className={isActive('/pesanan')}>Pesanan</Link>
@@ -47,7 +49,6 @@ const Sidebar = () => {
           </>
         )}
 
-        {/* Akses KHUSUS BOS */}
         {role === 'bos' && (
           <>
             <Link to="/produk" className={isActive('/produk')}>Produk</Link>
@@ -60,7 +61,6 @@ const Sidebar = () => {
           </>
         )}
 
-        {/* Akses KHUSUS CS */}
         {role === 'cs' && (
           <>
             <Link to="/pesanan" className={isActive('/pesanan')}>Pesanan</Link>

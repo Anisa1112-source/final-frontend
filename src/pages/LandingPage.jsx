@@ -1,68 +1,66 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import "../style/LandingPage.css"; 
 
 function LandingPage() {
   return (
-    <div className="landing-container" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#f4f7f6', fontFamily: 'Arial, sans-serif' }}>
+    <div className="landing-wrapper">
       
-      {/* 1. NAVBAR ATAS */}
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 80px', backgroundColor: '#fff', boxShadow: '0 2px 5px rgba(0,0,0,0.05)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <img src="/assets/Logo.png" alt="Logo" style={{ width: '40px', height: '40px' }} />
+      {/* NAVBAR ATAS */}
+      <header className="landing-header">
+        <div className="logo-brand">
+          <img src="/assets/Logo.png" alt="Dental Lab Logo" onError={(e) => { e.target.src = "/assets/Logo.png" }} />
           <div>
-            <span style={{ fontWeight: 'bold', color: '#333', fontSize: '18px', display: 'block', letterSpacing: '1px' }}>DENTAL LAB</span>
-            <span style={{ fontSize: '11px', color: '#0C96E4', fontWeight: 'bold', display: 'block', letterSpacing: '0.5px' }}>MANUFACTURE</span>
+            <span className="logo-text">DENTAL LAB</span>
+            <span className="logo-subtext">MANUFACTURE</span>
           </div>
         </div>
-        <nav style={{ display: 'flex', gap: '25px' }}>
-          <a href="#home" style={{ textDecoration: 'none', color: '#0C96E4', fontWeight: 'bold' }}>Home</a>
-          <a href="#tentang" style={{ textDecoration: 'none', color: '#666' }}>Tentang Kami</a>
-          <a href="#layanan" style={{ textDecoration: 'none', color: '#666' }}>Layanan Lab</a>
+        <nav className="nav-links">
+          <a href="#home" className="nav-link">Home</a>
+          <a href="#tentang" className="nav-link">Tentang Kami</a>
+          <a href="#layanan" className="nav-link">Layanan Lab</a>
         </nav>
       </header>
 
-      {/* 2. HERO SECTION HUB */}
-      <main style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 80px', gap: '50px' }}>
-        
-        {/* Sisi Kiri: Teks & Tombol Portal */}
-        <div style={{ flex: 1, maxWidth: '600px' }}>
-          <span style={{ backgroundColor: '#E3F2FD', color: '#0C96E4', padding: '6px 12px', borderRadius: '20px', fontSize: '13px', fontWeight: 'bold', display: 'inline-block', marginBottom: '15px' }}>
-            ✨ Sistem Manajemen Pemesanan Protesa Dental
-          </span>
-          <h1 style={{ fontSize: '46px', color: '#2c3e50', marginBottom: '20px', lineHeight: '1.2', fontWeight: '80px' }}>
-            Welcome to <br />
-            <span style={{ color: '#0C96E4', fontWeight: 'bold' }}>Dental Lab Manufacture</span>
+      {/* HERO SECTION - Fokus Penuh Mitra Dokter */}
+      <main className="landing-main">
+        <div className="hero-left">
+          <div className="badge-tag">
+            ✨ Digital Prosthetic Management System
+          </div>
+          <h1 className="hero-title">
+            Precision & Quality <br />
+            <span className="highlight">For Your Dental Lab</span>
           </h1>
-          <p style={{ fontSize: '16px', color: '#666', marginBottom: '40px', lineHeight: '1.6' }}>
-            Solusi digital terbaik untuk klinik gigi Anda. Kami memproduksi restorasi dental, mahkota (crown), jembatan gigi (bridge), dan akrilik berkualitas tinggi dengan presisi maksimal dan waktu pengerjaan laboratorium yang efisien.
+          <p className="hero-desc">
+            Platform digital end-to-end untuk restorasi dental modern. Mudahkan alur 
+            pemesanan, produksi crown, bridge, veneer, hingga akrilik dengan presisi maksimal.
           </p>
 
-          {/* DUA TOMBOL UTAMA MENUJU PORTAL LOGIN */}
-          <div style={{ display: 'flex', gap: '20px' }}>
-            <Link to="/login-dokter" style={{ padding: '16px 30px', backgroundColor: '#0C96E4', color: '#fff', textDecoration: 'none', borderRadius: '8px', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(12, 150, 228, 0.3)', textAlign: 'center', flex: 1, transition: '0.3s' }}>
-              👨‍⚕️ Masuk Area Dokter
-            </Link>
-            <Link to="/login" style={{ padding: '16px 30px', backgroundColor: '#fff', color: '#333', textDecoration: 'none', borderRadius: '8px', fontWeight: 'bold', border: '2px solid #ccc', textAlign: 'center', flex: 1, transition: '0.3s' }}>
-              🏢 Portal Karyawan
+          <div className="hero-buttons">
+            {/* 🌟 Tombol Masuk Hanya Dikhususkan Untuk Dokter / Klinik Mitra */}
+            <Link to="/login-dokter" className="btn-portal btn-primary">
+              Mulai Pesan
             </Link>
           </div>
         </div>
 
-        {/* Sisi Kanan: Ilustrasi Hero */}
-        <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+        <div className="hero-right">
           <img 
-            src="/src/assets/hero.png" 
+            src="/src/assets/logo.png" 
             alt="Dental Manufacture Illustration" 
-            style={{ width: '100%', maxWidth: '48px0px', objectFit: 'contain' }}
-            onError={(e) => { e.target.src = "/assets/Logo.png" }} // Fallback jika path aset terlewat
+            onError={(e) => { e.target.src = "/assets/Logo.png" }} 
           />
         </div>
-
       </main>
 
-      {/* 3. FOOTER */}
-      <footer style={{ textAlign: 'center', padding: '20px', color: '#aaa', fontSize: '13px', backgroundColor: '#fff', borderTop: '1px solid #eee' }}>
-        &copy; {new Date().getFullYear()} Dental Lab Manufacture System. Hak Cipta Dilindungi Undang-Undang.
+      {/* FOOTER - Akses Karyawan Disamarkan / Dihidden */}
+      <footer className="landing-footer">
+        &copy; {new Date().getFullYear()} Dental Lab Manufacture. All rights reserved. 
+        {/* Opsional: Tautan login karyawan ditaruh sangat samar di footer atau di-exclude sama sekali */}
+        <span style={{marginLeft: '20px', fontSize: '10px', color: '#cbd5e1'}}>
+          <Link to="/login" style={{color: '#94a3b8', textDecoration: 'none'}}>Internal System</Link>
+        </span>
       </footer>
 
     </div>

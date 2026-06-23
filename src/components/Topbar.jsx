@@ -1,35 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import apiClient from '../config/axiosConfig'; // Sesuaikan path config axios kamu
+import apiClient from '../config/axiosConfig'; 
 import "../style/style.css"; 
 
-const Topbar = ({ title, showBackButton }) => {
+// 🌟 Tambahkan props role ('karyawan' atau 'dokter')
+const Topbar = ({ title, showBackButton, role = 'karyawan' }) => {
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState("Memuat...");
 
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        // Ganti '/api/profil' sesuai dengan endpoint GET profile/detail user yang aktif di backend-mu
-        const response = await apiClient.get('/api/profil/karyawan'); 
+        // 🌟 Tentukan endpoint secara kondisional berdasarkan props role
+        const endpoint = role === 'dokter' ? '/api/profil/dokter' : '/api/profil/karyawan';
         
-        // Pastikan properti email diambil sesuai respons JSON dari backend Golang-mu
-        // (Biasa berupa response.data?.data?.email atau response.data?.email)
+        const response = await apiClient.get(endpoint); 
+        
         const emailFromServer = response.data?.data?.email || response.data?.email || "admin@klinik.com";
-        
         setUserEmail(emailFromServer);
-        
-        // Opsional: Simpan juga ke localStorage agar bisa dipakai halaman lain jika dibutuhkan
         localStorage.setItem('email', emailFromServer);
       } catch (error) {
         console.error("Gagal memuat profil untuk topbar:", error);
-        // Fallback ke localStorage jika internet/API gagal, agar tidak stuck di tulisan "Memuat..."
         setUserEmail(localStorage.getItem('email') || 'admin@klinik.com');
       }
     };
 
     fetchProfileData();
-  }, []);
+  }, [role]); // Tambahkan role sebagai dependensi useEffect
 
   return (
     <div className="topbar">
