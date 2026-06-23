@@ -98,8 +98,10 @@ function LoginDokter() {
           </button>
 
           <div className="register-link">
-            Bukan Dokter? <Link to="/" style={{color: 'blue'}}>Login Karyawan</Link>
-            <br/><br/>
+            {/* Bukan Dokter? <Link to="/" style={{color: 'blue'}}>Login Karyawan</Link>
+            <br/>
+             */}
+            <br/>
             Belum punya akun? <Link to="/register">Register Dokter</Link>
           </div>
         </div>

@@ -96,10 +96,10 @@ function Login() {
           <button className="btn" onClick={handleLogin} disabled={isLoading}>
             {isLoading ? "Memproses..." : "Masuk"}
           </button>
-
+{/* 
           <div className="register-link">
             Anda seorang Dokter? <Link to="/login-dokter" style={{color: 'blue'}}>Login di sini</Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
