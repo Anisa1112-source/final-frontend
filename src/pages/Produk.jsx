@@ -82,11 +82,19 @@ const KatalogProduk = () => {
         
           <Topbar title="Produk" />
           {isAdmin && !showForm && (
-            <div className="topbar-right">
-              <button className="btn" onClick={() => { setShowForm(true); setIsEditing(false); setFormData({ id_produk: '', nama_bahan: '', spesifikasi: '', harga: '' }); }} style={{ width: 'auto', padding: '10px 20px', background: '#3498db' }}>
-                + Tambah Produk Baru
-              </button>
-            </div>
+           <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
+            <button 
+              className="btn" 
+              onClick={() => { 
+                setShowForm(true); 
+                setIsEditing(false); 
+                setFormData({ id_produk: '', nama_bahan: '', spesifikasi: '', harga: '' }); 
+              }} 
+              style={{ width: 'auto', padding: '12px 20px', background: '#3498db', color: 'white', border: 'none', borderRadius: '10px', cursor: 'pointer', fontWeight: 'bold' }}
+            >
+              + Tambah Produk Baru
+            </button>
+          </div>
           )}
 
         {/* Form Input Sesuai Style Register Box */}
