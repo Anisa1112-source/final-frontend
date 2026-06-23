@@ -19,10 +19,10 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="sidebar-logo">
         <img 
-          src="/src/assets/logokecil.png" 
+          src="/src/assets/fix.png" 
           alt="Logo" 
           style={{ width: '100%', maxWidth: '45px', height: 'auto', objectFit: 'contain' }} 
-          onError={(e) => { e.target.src = "/src/assets/Logo.png" }} 
+          onError={(e) => { e.target.src = "/src/assets/fix.png" }} 
         />
         <div>
           <p className="logo-title">DENTAL</p>

@@ -3,6 +3,7 @@ import apiClient from "../config/axiosConfig";
 import { jwtDecode } from "jwt-decode";
 import "../style/style.css";
 import "../style/Persetujuan.css"
+import Topbar from "../components/Topbar";
 
 function Persetujuan() {
   const [pesananList, setPesananList] = useState([]);
@@ -87,14 +88,7 @@ function Persetujuan() {
     <div className="dashboard-container">
       <div className="main-content">
 
-        <div className="topbar">
-          <div className="topbar-left">
-            <h2>Persetujuan Bos</h2>
-          </div>
-          <div className="topbar-right">
-            <span>bos@gmail.com</span>
-          </div>
-        </div>
+          <Topbar title="Persetujuan" />
 
         {errorMsg && <div style={{ color: "red", marginBottom: 10 }}>{errorMsg}</div>}
 

@@ -45,12 +45,21 @@ const Topbar = ({ title, showBackButton, role = 'karyawan' }) => {
       <div className="topbar-right" style={{ display: 'flex', alignItems: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <span style={{ fontSize: '13px', color: '#676060', fontWeight: '500' }}>{userEmail}</span>
-          <i 
-            className="fa-regular fa-circle-user admin-avatar" 
-            style={{ fontSize: '24px', color: '#001a8d', cursor: 'pointer' }}
-            onClick={() => navigate("/profil")}
-            title="Ke Halaman Profil"
-          ></i>
+         <img 
+        src="/src/assets/pfp.png" 
+        alt="Profil" 
+        title="Ke Halaman Profil"
+        style={{ 
+          width: '100%', 
+          maxWidth: '45px', 
+          height: 'auto', 
+          objectFit: 'contain', 
+          cursor: 'pointer', /* Menampilkan kursor tangan saat dihover */
+          borderRadius: '50%' /* Membuat gambar profil membulat estetik */
+        }} 
+        onClick={() => navigate("/profil")} // 🌟 Aksi navigasi dipindahkan ke sini
+        onError={(e) => { e.target.src = "/assets/pfp.png" }} 
+      />
         </div>
       </div>
     </div>

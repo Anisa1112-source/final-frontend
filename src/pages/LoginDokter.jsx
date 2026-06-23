@@ -55,7 +55,7 @@ function LoginDokter() {
     <div className="login-container">
       <div className="left-panel">
         <div className="logo-section">
-          <img src="/assets/Logo.png" alt="Logo Dental" />
+          <img src="/src/assets/fix.png" alt="Logo Dental" />
           <h1>DENTAL</h1>
           <h2>SISTEM KLINIK</h2>
           <p>Portal Khusus Mitra Dokter</p>
