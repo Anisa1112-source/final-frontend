@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import apiClient from '../config/axiosConfig'; 
 import "../style/style.css"; 
 
-// 🌟 Tambahkan props role ('karyawan' atau 'dokter')
 const Topbar = ({ title, showBackButton, role = 'karyawan' }) => {
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState("Memuat...");
@@ -11,7 +10,7 @@ const Topbar = ({ title, showBackButton, role = 'karyawan' }) => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        // 🌟 Tentukan endpoint secara kondisional berdasarkan props role
+        // tentukan endpoint secara kondisional berdasarkan props role
         const endpoint = role === 'dokter' ? '/api/profil/dokter' : '/api/profil/karyawan';
         
         const response = await apiClient.get(endpoint); 
@@ -54,10 +53,10 @@ const Topbar = ({ title, showBackButton, role = 'karyawan' }) => {
           maxWidth: '45px', 
           height: 'auto', 
           objectFit: 'contain', 
-          cursor: 'pointer', /* Menampilkan kursor tangan saat dihover */
-          borderRadius: '50%' /* Membuat gambar profil membulat estetik */
+          cursor: 'pointer', 
+          borderRadius: '50%'
         }} 
-        onClick={() => navigate("/profil")} // 🌟 Aksi navigasi dipindahkan ke sini
+        onClick={() => navigate("/profil")} 
         onError={(e) => { e.target.src = "/assets/pfp.png" }} 
       />
         </div>

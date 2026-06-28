@@ -22,7 +22,6 @@ function Login() {
     setErrorMsg("");
 
     try {
-      // FIX: Langsung tembak API Karyawan
       const response = await apiClient.post("/login/karyawan", {
         email,
         password,
@@ -34,8 +33,6 @@ function Login() {
 
       if (token) {
         localStorage.setItem("token", token);
-
-        // Karyawan pasti punya role (bos, cs, teknisi)
         const decoded = jwtDecode(token);
         localStorage.setItem("role", decoded.role);
 

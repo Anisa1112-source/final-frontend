@@ -50,10 +50,8 @@ function Produksi() {
   const revisi = pengerjaanList.filter((p) => p.status_produksi === "revisi");
   const selesai = pengerjaanList.filter((p) => p.status_produksi === "selesai");
 
-  // Urutan status sesuai SRS, dipakai untuk validasi tidak boleh mundur
   const urutanStatus = { antrian: 1, dikerjakan: 2, revisi: 3, selesai: 4 };
 
-// Pilihan status berikutnya tergantung status saat ini (Diperbarui agar lebih fleksibel)
   const getOpsiStatus = (statusSaatIni) => {
     switch (statusSaatIni) {
       case "antrian":
@@ -61,7 +59,6 @@ function Produksi() {
       case "dikerjakan":
         return ["revisi", "selesai"];
       case "revisi":
-        // 🌟 Ditambahkan opsi "dikerjakan" maupun "selesai" secara langsung
         return ["dikerjakan", "selesai"]; 
       default:
         return [];

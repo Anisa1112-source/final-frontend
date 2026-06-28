@@ -6,7 +6,7 @@ import "../style/style.css";
 import "../style/Produksi.css"; 
 import Topbar from '../components/Topbar';
 
-// === 1. STATISTIK KEUANGAN & JUMLAH (Khusus CS & Bos) ===
+// STATISTIK KEUANGAN & JUMLAH (Khusus CS & Bos)
 const BosCsStats = () => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -51,7 +51,6 @@ const BosCsStats = () => {
   );
 };
 
-// === 2. MODUL RANGKUMAN BAWAH (Intip Status Produksi & Pesanan Terbaru) ===
 const OperationalSummary = () => {
   const [pengerjaanList, setPengerjaanList] = useState([]);
 
@@ -129,10 +128,9 @@ const OperationalSummary = () => {
   );
 };
 
-// === 3. DASHBOARD DOKTER (Sesuai Figma Landing Page + Tombol Aksi) ===
+// dashboard dokter
 const DokterDashboard = () => {
   const navigate = useNavigate();
-
   return (
     <div>
 
@@ -166,7 +164,7 @@ const DokterDashboard = () => {
   );
 };
 
-// === 4. DASHBOARD UTAMA ===
+// DASHBOARD UTAMA
 const Dashboard = () => {
   const role = localStorage.getItem('role') || 'guest';
   const token = localStorage.getItem("token");
@@ -209,7 +207,6 @@ const Dashboard = () => {
         {/* TAMPILAN OPERASIONAL & INTIM KELOLAAN LAB */}
         {(role === 'teknisi' || role === 'cs' || role === 'bos') && <OperationalSummary />}
 
-        {/* TAMPILAN JIKA GUEST / EXPIRED */}
         {role === 'guest' && (
           <div className="card" style={{ padding: '40px', textAlign: 'center', background: 'white', borderRadius: '12px', marginTop: '30px' }}>
             <h3 style={{ color: '#e74c3c' }}> Sesi Login Anda tidak terdeteksi, silakan login ulang. </h3>

@@ -5,8 +5,6 @@ import "../style/LandingPage.css";
 function LandingPage() {
   return (
     <div className="landing-wrapper">
-      
-      {/* NAVBAR ATAS */}
       <header className="landing-header">
         <div className="logo-brand" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
          

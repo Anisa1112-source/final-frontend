@@ -98,13 +98,12 @@ const KatalogProduk = () => {
           </div>
         )}
 
-        {/* ─── DESAIN FORM (TAMBAH & EDIT SAMA PERSIS - MAX WIDTH 700PX DI TENGAH) ─── */}
         {showForm && isAdmin && (
           <div style={{ 
             background: '#d7f0ff', 
             padding: '25px 30px', 
-            margin: '10px auto 25px auto', /* Otomatis ke tengah halaman */
-            maxWidth: '700px', /* Ukuran sedang ideal (tidak kebesaran/kekecilan) */
+            margin: '10px auto 25px auto', 
+            maxWidth: '700px',
             width: '100%',
             borderRadius: '12px', 
             boxShadow: '0 4px 14px rgba(0, 0, 0, 0.05)',

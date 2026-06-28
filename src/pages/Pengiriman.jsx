@@ -212,7 +212,6 @@ function Pengiriman() {
 
       </div>
 
-      {/* ─── MODAL DENGAN UKURAN UKURAN INPUT RAMPING & SERASI ─── */}
       {showModal && (
         <div 
           className="modal-overlay" 
@@ -238,7 +237,7 @@ function Pengiriman() {
               background: '#e3f2fd', 
               padding: '30px 35px', 
               width: '100%',
-              maxWidth: '460px', /* Dibuat sedikit lebih compact agar pas di mata */
+              maxWidth: '460px', 
               borderRadius: '24px', 
               boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
               boxSizing: 'border-box',
@@ -262,7 +261,7 @@ function Pengiriman() {
                 onChange={(e) => setForm({ ...form, id_pesanan: e.target.value })}
                 style={{ 
                   width: '100%', 
-                  padding: '10px 14px', /* Mengecilkan ukuran vertikal input */
+                  padding: '10px 14px', 
                   border: '1px solid #cbd5e1', 
                   borderRadius: '12px', 
                   outline: 'none', 
@@ -290,7 +289,7 @@ function Pengiriman() {
                 onChange={(e) => setForm({ ...form, nama_jasa: e.target.value })}
                 style={{ 
                   width: '100%', 
-                  padding: '10px 14px', /* Mengecilkan ukuran vertikal input */
+                  padding: '10px 14px', 
                   border: '1px solid #cbd5e1', 
                   borderRadius: '12px', 
                   outline: 'none', 
@@ -318,7 +317,7 @@ function Pengiriman() {
                 onChange={(e) => setForm({ ...form, no_resi: e.target.value })}
                 style={{ 
                   width: '100%', 
-                  padding: '10px 14px', /* Mengecilkan ukuran vertikal input */
+                  padding: '10px 14px', 
                   border: '1px solid #cbd5e1', 
                   borderRadius: '12px', 
                   outline: 'none', 
@@ -333,7 +332,6 @@ function Pengiriman() {
 
             {formError && <p className="form-error" style={{ color: '#ef4444', fontSize: '13px', margin: '0', textAlign: 'left', fontWeight: '500' }}>{formError}</p>}
 
-            {/* Tombol Kapsul Bulat Merah dan Hijau */}
             <div className="modal-actions" style={{ display: 'flex', gap: '15px', justifyContent: 'center', marginTop: '10px' }}>
               <button 
                 type="button"

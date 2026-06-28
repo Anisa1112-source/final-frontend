@@ -12,11 +12,9 @@ function Transaksi() {
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
 
-  // State untuk Filter Status & Search
   const [statusFilter, setStatusFilter] = useState("Semua");
   const [searchId, setSearchId] = useState("");
 
-  // State untuk Modal Konfirmasi Pembayaran
   const [showModal, setShowModal] = useState(false);
   const [selectedTrx, setSelectedTrx] = useState(null);
   const [metode, setMetode] = useState("");
@@ -27,20 +25,24 @@ function Transaksi() {
   let role = "";
   let idKaryawan = "";
   let displayEmail = localStorage.getItem("email") || "user@klinik.com";
+  let isDokter = false;
 
   if (token) {
     try {
       const decoded = jwtDecode(token);
       role = decoded.role || "";
       idKaryawan = decoded.id_karyawan || decoded.id || "";
+
+      if (decoded.id_dokter || role.toLowerCase() === 'dokter') {
+        isDokter = true;
+      }
+
     } catch (e) {
       console.error("Gagal decode token:", e);
     }
   }
 
-  // Hak akses tombol aksi (Hanya CS dan Bos)
   const isAksesKeuangan = role === "cs" || role === "bos";
-
   const fetchTransaksi = async () => {
     setLoading(true);
     try {
@@ -146,7 +148,6 @@ function Transaksi() {
     }
   };
 
-  // LOGIKA FILTER & SEARCH DI SISI FRONTEND
   const filteredTransaksi = transaksiList.filter((trx) => {
     // 1. Filter berdasarkan Search ID Pesanan
     const matchesSearch = trx.id_pesanan
@@ -242,7 +243,9 @@ function Transaksi() {
                   <th style={{padding: '12px 15px', color: '#676060', fontSize: '12px', fontWeight: '600', textAlign: 'right'}}>Total Tagihan</th>
                   <th style={{padding: '12px 15px', color: '#676060', fontSize: '12px', fontWeight: '600', textAlign: 'center'}}>Metode</th>
                   <th style={{padding: '12px 15px', color: '#676060', fontSize: '12px', fontWeight: '600', textAlign: 'center'}}>Status</th>
-                  <th style={{padding: '12px 15px', color: '#676060', fontSize: '12px', fontWeight: '600', textAlign: 'center'}}>Aksi</th>
+                  {!isDokter && (
+                    <th style={{padding: '12px 15px', color: '#676060', fontSize: '12px', fontWeight: '600', textAlign: 'center'}}>Aksi</th>
+                  )}
                 </tr>
               </thead>
               <tbody>
@@ -272,7 +275,6 @@ function Transaksi() {
                         {trx.metode_pembayaran || "-"}
                       </td>
                       <td style={{padding: '15px 15px', textAlign: 'center'}}>
-                        {/* Ukuran & struktur badge status disamakan */}
                         <span 
                           className={`badge ${trx.status_pembayaran === 'lunas' ? 'badge-selesai' : 'badge-baru'}`} 
                           style={{
@@ -288,6 +290,7 @@ function Transaksi() {
                           {trx.status_pembayaran}
                         </span>
                       </td>
+                      {!isDokter && (
                       <td style={{padding: '15px 15px', textAlign: 'center'}}>
                         {trx.status_pembayaran !== 'lunas' && isAksesKeuangan ? (
                           <button 
@@ -311,6 +314,7 @@ function Transaksi() {
                           <span style={{fontSize: '12px', color: '#999', display: 'inline-block', minWidth: '85px'}}>-</span>
                         )}
                       </td>
+                      )}
                     </tr>
                   ))
                 )}
@@ -320,7 +324,6 @@ function Transaksi() {
         </div>
       </div>
 
-      {/* Bagian Modal ... tetap sama seperti kode Anda sebelumnya */}
       {showModal && selectedTrx && (
         <div 
           className="modal-overlay"

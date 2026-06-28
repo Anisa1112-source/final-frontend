@@ -118,7 +118,6 @@ function ModalTambah({ onClose, onSuccess }) {
   );
 }
 
-/* ─── Modal Edit Karyawan (Sudah Diubah ke Biru Muda) ─── */
 function ModalEdit({ karyawan, onClose, onSuccess }) {
   const [form, setForm] = useState({
     nama: karyawan.nama || '',

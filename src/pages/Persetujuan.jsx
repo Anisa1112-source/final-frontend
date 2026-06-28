@@ -33,7 +33,6 @@ function Persetujuan() {
     fetchPesananPending();
   }, []);
 
-  // Buka modal saat klik Setuju/Tolak
   const handleOpenModal = (pesanan, jenisAksi) => {
     setSelectedPesanan(pesanan);
     setAksi(jenisAksi);

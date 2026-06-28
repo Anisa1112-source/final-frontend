@@ -70,16 +70,15 @@ function Pesanan() {
     fetchPesanan();
   }, [token]);
 
-  // Pengaturan warna background & teks agar konsisten & rapi
   const getBadgeStyle = (status) => {
     const baseStyle = {
       display: 'inline-block',
-      padding: '6px 16px', // Ukuran padding disamakan rata untuk semua status
+      padding: '6px 16px', 
       borderRadius: '20px',
       fontSize: '12px',
       fontWeight: '600',
       textAlign: 'center',
-      minWidth: '90px', // Menjaga lebar box badge tetap seragam
+      minWidth: '90px', 
       textTransform: 'capitalize'
     };
 
@@ -223,7 +222,6 @@ function Pesanan() {
           </div>
         </div>
 
-        {/* Tabel Utama yang Diatur Simetris */}
         <div className="table-card" style={{ background: '#ffffff', borderRadius: '14px', boxShadow: '0 4px 12px rgba(0,0,0,0.04)', padding: '10px', overflowX: 'auto' }}>
           {loading ? (
             <p style={{ padding: '20px', textAlign: 'center' }}>Memuat pesanan...</p>
