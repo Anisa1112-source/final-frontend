@@ -1,14 +1,18 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-    background:#f5f5f5;
+body {
+  width: 100%;
+  min-height: 100vh;
 }
 
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
 .input-group input,
 .input-group textarea,
 .input-group select,
@@ -142,6 +146,7 @@ a,
     padding:14px;
     border:none;
     background:#ffffff;
+    color:#222222;
     border-radius:8px;
     box-shadow:0 3px 5px rgba(0,0,0,0.2);
 }
