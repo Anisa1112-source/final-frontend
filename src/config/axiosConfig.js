@@ -1,4 +1,8 @@
 import axios from 'axios';
+import Swal from "sweetalert2";
+
+
+let isSessionExpired = false;
 
 // buat instance dasar
 const apiClient = axios.create({
@@ -27,10 +31,20 @@ apiClient.interceptors.request.use(
 
 apiClient.interceptors.response.use(
   (response) => response,
-  (error) => {
-    if (error.response && error.response.status === 401) {
+  async (error) => {
 
-      alert("Sesi login Anda telah berakhir.\nSilakan login kembali.");
+    if (error.response?.status === 401 && !isSessionExpired) {
+
+      isSessionExpired = true;
+
+      await Swal.fire({
+        icon: "warning",
+        title: "Sesi Login Berakhir",
+        text: "Silakan login kembali.",
+        confirmButtonText: "Login",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      });
 
       localStorage.removeItem("token");
       localStorage.removeItem("role");
